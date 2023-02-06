@@ -6,9 +6,5 @@ git:
       source_language: en
       source_file_dir: docs/
       translation_files_expression: 'docs/**/<lang>.md/'
-      ignore_dirs: 
-        - localization_project/path2/
-        - localization_project/path3/
       ignore_files: 
-        - localization_project/path1/example2.txt
-        - localization_project/path1/example4.txt
+        - 'docs/**/<lang>.md/'
