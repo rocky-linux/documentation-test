@@ -1,10 +1,21 @@
 git:
-  filters:
-    - filter_type: dir
-      file_format: GITHUBMARKDOWN
-      source_file_extension: md
-      source_language: en
-      source_file_dir: docs/
-      translation_files_expression: 'docs/**/<lang>.md/'
-      ignore_files: 
-        - 'docs/**/<lang>.md/'
+ filters:    
+  - filter_type: file
+    file_format: GITHUBMARKDOWN
+    source_language: en
+    source_file: docs/index.md
+    translation_files_expression: 'docs/index.<lang>.md'
+    
+  - filter_type: dir
+    file_format: GITHUBMARKDOWN
+    source_file_extension: md
+    source_language: en
+    source_file_dir: docs/books/en/
+    translation_files_expression: 'docs/books/<lang>/'    
+    
+  - filter_type: dir
+    file_format: GITHUBMARKDOWN
+    source_file_extension: md
+    source_language: en
+    source_file_dir: docs/root/en/
+    translation_files_expression: 'docs/root/<lang>/'
