@@ -1,0 +1,30 @@
+version: '2'
+services:
+  mkdocs:
+    privileged: true
+    image: rockylinux:9.1
+    ports:
+      - 8001:8001
+    environment:
+      PIP_NO_CACHE_DIR: "off"
+      PIP_DISABLE_PIP_VERSION_CHECK: "on"
+    volumes:
+       - type: bind
+         source: ./documentation
+         target: /app/docs
+       - type: bind
+         source: ./docs.rockylinux.org
+         target: /app/docs.rockylinux.org
+    working_dir: /app
+    command: bash -c "dnf install -y python3 pip git && \
+       ln -sfn  /app/docs   docs.rockylinux.org/docs && \
+       cd docs.rockylinux.org && \
+       git config  --global user.name webmaster && \
+       git config  --global user.email webmaster@rockylinux.org && \
+       curl -SL https://raw.githubusercontent.com/rocky-linux/documentation-test/main/docs/labs/mike-plugin-changes.patch -o mike-plugin-changes.patch && \
+       git apply --reverse --check mike-plugin-changes.patch && \
+       /usr/bin/pip3 install --no-cache-dir -r requirements.txt && \
+       /usr/local/bin/mike deploy -F mkdocs.yml 9.1 91alias && \
+       /usr/local/bin/mike set-default 9.1 && \
+       echo  All done && \
+       /usr/local/bin/mike serve  -F mkdocs.yml -a  0.0.0.0:8001"
