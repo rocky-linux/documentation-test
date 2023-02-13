@@ -1,0 +1,33 @@
+diff --git a/mkdocs.yml b/mkdocs.yml
+index 0412721..2b9654d 100644
+--- a/mkdocs.yml
++++ b/mkdocs.yml
+@@ -58,6 +58,8 @@ markdown_extensions:
+   - meta
+
+ plugins:
++  - mike:
++      version_selector: true
+   - search
+   - awesome-pages
+   - i18n:
+@@ -82,6 +84,9 @@ plugins:
+   - tags
+
+ extra:
++  version:
++     provider: mike
++     default: 9.1
+   alternate:
+     - name: Default (en)
+       link: ./
+diff --git a/requirements.txt b/requirements.txt
+index 8b5ff5f..500cb4b 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,4 +1,5 @@
+ mkdocs
++mike
+ mkdocs-awesome-pages-plugin
+ mkdocs-git-revision-date-localized-plugin
+ mkdocs-localsearch
